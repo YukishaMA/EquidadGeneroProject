@@ -36,7 +36,7 @@ router.get('/notes', (req, res) => {
     res.render('notes/all-notes');
 });
 
-router.post('/',upload.single('excel'),(req,res)=>{
+router.post('/excel',(req,res)=>{
     var workbook =  XLSX.readFile(req.file.path);
     var sheet_namelist = workbook.SheetNames;
     var x=0;
