@@ -36,4 +36,22 @@ router.get('/notes', (req, res) => {
     res.render('notes/all-notes');
 });
 
+router.post('/',upload.single('excel'),(req,res)=>{
+    var workbook =  XLSX.readFile(req.file.path);
+    var sheet_namelist = workbook.SheetNames;
+    var x=0;
+    sheet_namelist.forEach(element => {
+        var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_namelist[x]]);
+        excelModel.insertMany(xlData,(err,data)=>{
+            if(err){
+                console.log(err);
+            }else{
+                console.log(data);
+            }
+        })
+        x++;
+    });
+    res.redirect('/');
+  });
+
 module.exports = router;

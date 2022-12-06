@@ -1,5 +1,6 @@
-<div class="col-md-4 mx-auto">
-  <form action="/exceldata" method="POST" autocomplete="off">
+<h3>{{viewTitle}}</h3>
+
+<form action="/exceldata" method="POST" autocomplete="off">
     <input type="hidden" name="_id" value="{{exceldata._id}}">
     <div class="form-group">
         <label>Entidad</label>
@@ -37,5 +38,4 @@
         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
         <a class="btn btn-secondary" href="/exceldata/list"><i class="fa fa-list-alt"></i> View All</a>
     </div>
-  </form>
-</div>
+</form>

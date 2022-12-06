@@ -4,10 +4,17 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
 
+var bodyParser = require('body-parser');
+var XLSX       = require('xlsx');
+var multer     = require('multer');
 
 //Initializations
 const app = express ();
 require('./database');
+
+//set the template engine
+app.set('view engine','ejs');
+
 
 //Settings
 app.set('port', process.env.PORT || 3000);
@@ -43,3 +50,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'))
 })
+
+//multer
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  });
+  
+  var upload = multer({ storage: storage });
