@@ -1,7 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const app = express();
+var bodyParser = require('body-parser');
 
-const Note = require('../models/Note');
+
+app.set('view engine','ejs');
+
+//fetch data from the request
+app.use(bodyParser.urlencoded({extended:false}));
+
+
+var excelModel = require('../models/Note');
+//const Note = require('../models/Note');
 
 router.get('/notes/add', (req, res) => {
     res.render('notes/new-note');
@@ -36,7 +46,7 @@ router.get('/notes', (req, res) => {
     res.render('notes/all-notes');
 });
 
-router.post('/excel',(req,res)=>{
+app.post('/excel',(req,res)=>{
     var workbook =  XLSX.readFile(req.file.path);
     var sheet_namelist = workbook.SheetNames;
     var x=0;
@@ -54,7 +64,7 @@ router.post('/excel',(req,res)=>{
     res.redirect('/');
   });
 
-router.get('/excel',(req,res)=>{
+  app.get('/excelHome',(req,res)=>{
     excelModel.find((err,data)=>{
         if(err){
             console.log(err)
@@ -66,6 +76,6 @@ router.get('/excel',(req,res)=>{
             }
         }
     });
-  });
+ });
 
 module.exports = router;

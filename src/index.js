@@ -38,18 +38,8 @@ app.use(session({
 
 //Global variables
 
-//Routes
-app.use(require('./routes/index'));
-app.use(require('./routes/notes'));
-app.use(require('./routes/users'));
-
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));
-
-//Server is listening 
-app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'))
-})
 
 //multer
 var storage = multer.diskStorage({
@@ -62,3 +52,17 @@ var storage = multer.diskStorage({
   });
   
   var upload = multer({ storage: storage });
+
+
+//Routes
+app.use(require('./routes/index'));
+app.use(require('./routes/notes'));
+app.use(require('./routes/users'));
+app.use(require('./routes/data'));
+
+
+//Server is listening 
+app.listen(app.get('port'), () => {
+    console.log('Server on port', app.get('port'))
+})
+

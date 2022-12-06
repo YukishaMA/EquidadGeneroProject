@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+
 //RUTA AL FORM DE DATOS
 router.get('/data/add', (req, res) => {
     res.render('datos/new-data');
 });
+
 //RUTA QUE ALMACENA LOS DATOS
 router.post('/data/new-data', (req, res) => {
     const { entidad, anio,total,mujeres,hombres,p_mujeres,p_hombres}=req.body;
@@ -39,9 +41,11 @@ router.post('/data/new-data', (req, res) => {
             }        )
     }
 });
-//
+
 router.get('/data', (req, res) => {
-    res.send('Regresar la vista para el admin aqui ');
+    res.render('admin/index');
 });
 
 module.exports = router;
+
+
