@@ -54,4 +54,18 @@ router.post('/',upload.single('excel'),(req,res)=>{
     res.redirect('/');
   });
 
+router.get('/excel',(req,res)=>{
+    excelModel.find((err,data)=>{
+        if(err){
+            console.log(err)
+        }else{
+            if(data!=''){
+                res.render('home',{result:data});
+            }else{
+                res.render('home',{result:{}});
+            }
+        }
+    });
+  });
+
 module.exports = router;
